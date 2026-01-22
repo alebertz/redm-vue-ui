@@ -1,5 +1,5 @@
 {
-  "name": "@mega/redm-vue-ui",
+  "name": "@alebtz/redm-vue-ui",
   "version": "1.0.0",
   "description": "Vue 3 UI Component Library inspired by Red Dead Redemption styling for RedM/FiveM NUI",
   "type": "module",
@@ -32,7 +32,7 @@
     "rdr",
     "nui"
   ],
-  "author": "MEGA",
+  "author": "Alessandro Bertozzi",
   "license": "MIT",
   "peerDependencies": {
     "vue": "^3.0.0"
