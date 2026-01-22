@@ -1,0 +1,46 @@
+:root {
+  /* Colors */
+  --rdr-color-primary: #B62A2A;
+  --rdr-color-primary-dark: #B21214;
+  --rdr-color-text: #fafafa;
+  --rdr-color-text-muted: rgba(250, 250, 250, 0.7);
+  --rdr-color-background: rgba(33, 33, 33, 0.3);
+  --rdr-color-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Fonts */
+  --rdr-font-decorative: 'Chinese Rocks', sans-serif;
+  --rdr-font-title: 'RDR Lino Regular', serif;
+  --rdr-font-body: 'Hapna Slab Serif', serif;
+  
+  /* Font Sizes */
+  --rdr-font-size-xs: 16px;
+  --rdr-font-size-sm: 18px;
+  --rdr-font-size-md: 20px;
+  --rdr-font-size-lg: 24px;
+  --rdr-font-size-xl: 32px;
+  
+  /* Spacing */
+  --rdr-spacing-xs: 5px;
+  --rdr-spacing-sm: 10px;
+  --rdr-spacing-md: 15px;
+  --rdr-spacing-lg: 25px;
+  --rdr-spacing-xl: 50px;
+  
+  /* Borders */
+  --rdr-border-width: 2px;
+  --rdr-border-radius: 5px;
+  
+  /* Transitions */
+  --rdr-transition-fast: 0.15s ease-out;
+  --rdr-transition-normal: 0.3s ease-out;
+  
+  /* Scrollbar */
+  --rdr-scrollbar-width: 50px;
+  --rdr-scrollbar-thumb: rgba(178, 18, 20, 0.3);
+  
+  /* Textures */
+  --rdr-texture-bg: url('../assets/textures/bg.png');
+  --rdr-texture-bg-red: url('../assets/textures/bg-red.png');
+  --rdr-texture-box: url('../assets/textures/box.png');
+  --rdr-texture-box-red: url('../assets/textures/box-red.png');
+}
