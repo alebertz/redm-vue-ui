@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'RDR Lino Regular';
+  src: url("../assets/fonts/RDR_Lino_Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hapna Slab Serif';
+  src: url("../assets/fonts/Hapna_Slab_Serif.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chinese Rocks';
+  src: url("../assets/fonts/chinese_rocks.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: var(--rdr-font-body);
+  color: var(--rdr-color-text);
+}
+
+h1, h2, h3, h4, h5, h6, hr, p {
+  margin: 0;
+  font-weight: normal;
+}
+
+h1 {
+  font-family: var(--rdr-font-decorative);
+  font-weight: normal;
+  font-size: var(--rdr-font-size-xl);
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: var(--rdr-font-title);
+}
+
+h2 {
+  font-size: var(--rdr-font-size-lg);
+}
+
+p {
+  font-family: var(--rdr-font-body);
+  font-size: var(--rdr-font-size-sm);
+  line-height: 25px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: var(--rdr-scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+  border-radius: var(--rdr-border-radius);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 22px solid rgba(0, 0, 0, 0);
+  background: var(--rdr-scrollbar-thumb); 
+  border-radius: 9999px;
+  background-clip: padding-box;
+}
+
+/* Utility Classes */
+.scrollable {
+  overflow-y: scroll;
+}
+
+.header-group {
+  width: fit-content;
+}
+
+.header-group hr {
+  border: var(--rdr-border-width) solid var(--rdr-color-primary);
+  margin-top: var(--rdr-spacing-xs);
+}
