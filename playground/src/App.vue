@@ -12,6 +12,9 @@ const sliderOpen = ref(false)
 const testBoxVisible = ref(false)
 const sliderValue = ref(50)
 const numberValue = ref(10)
+const checkboxValue = ref(false)
+const checkbox2Value = ref(true)
+const checkbox3Value = ref(false)
 
 const demoNotes = [
   { id: 1, author: 'Dr. John Smith', date: '2026-01-20', content: 'Patient showing signs of improvement. Continue treatment.' },
@@ -98,6 +101,25 @@ const demoNotes = [
             placeholder="Step of 5"
             style="margin-top: 15px;"
           />
+        </div>
+      </div>
+
+      <!-- Checkbox Section -->
+      <div class="section">
+        <RdrHeader :level="2">Checkboxes</RdrHeader>
+        <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px;">
+          <RdrCheckbox v-model="checkboxValue">
+            Accept terms and conditions
+          </RdrCheckbox>
+          <RdrCheckbox v-model="checkbox2Value">
+            Enable notifications
+          </RdrCheckbox>
+          <RdrCheckbox v-model="checkbox3Value" disabled>
+            Disabled checkbox
+          </RdrCheckbox>
+          <p style="margin-top: 10px; opacity: 0.8;">
+            Values: {{ checkboxValue }}, {{ checkbox2Value }}, {{ checkbox3Value }}
+          </p>
         </div>
       </div>
 
