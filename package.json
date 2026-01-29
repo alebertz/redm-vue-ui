@@ -19,7 +19,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:watch": "vite build --watch",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-demo": "vite build --config vite.config.demo.js"
   },
   "keywords": [
     "vue",
