@@ -2,7 +2,7 @@ name: Deploy Demo to Pages
 
 on:
   push:
-    branches: [main, feature/setup-demo]
+    branches: [main]
 
 permissions:
   contents: write
