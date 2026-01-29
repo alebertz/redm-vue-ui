@@ -2,6 +2,9 @@
 
 A Vue 3 UI Component Library inspired by Red Dead Redemption styling for RedM NUI interfaces.
 
+## 🌐 Demo page
+Take a look at the demo [here](https://alebertz.github.io/redm-vue-ui)
+
 ## 📦 Installation
 
 ```bash
