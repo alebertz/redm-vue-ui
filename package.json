@@ -1,6 +1,6 @@
 {
   "name": "@alebtz/redm-vue-ui",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Vue 3 UI Component Library inspired by Red Dead Redemption styling for RedM/FiveM NUI",
   "type": "module",
   "main": "./dist/redm-vue-ui.umd.cjs",
