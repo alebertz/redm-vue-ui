@@ -35,6 +35,10 @@
   ],
   "author": "Alessandro Bertozzi",
   "license": "MIT",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/alebertz/redm-vue-ui.git"
+  },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
