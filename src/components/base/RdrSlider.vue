@@ -19,6 +19,7 @@
         :max="max"
         :step="step"
         :value="modelValue"
+        :style="sliderStyle"
         @input="handleInput"
         @mouseenter="showTooltip = true"
         @mouseleave="handleMouseLeave"
@@ -70,12 +71,20 @@ const showTooltip = ref(false)
 const isDragging = ref(false)
 const isUpdating = ref(false)
 
-const tooltipStyle = computed(() => {
-  const percentage = ((props.modelValue - props.min) / (props.max - props.min)) * 100
-  return {
-    left: `${percentage}%`
-  }
+const progress = computed(() => {
+  const range = props.max - props.min
+  if (range === 0) return 0
+  const p = ((props.modelValue - props.min) / range) * 100
+  return Math.min(100, Math.max(0, p))
 })
+
+const sliderStyle = computed(() => ({
+  '--rdr-slider-progress': `${progress.value}%`
+}))
+
+const tooltipStyle = computed(() => ({
+  left: `${progress.value}%`
+}))
 
 // Trigger animation when value changes
 watch(() => props.modelValue, () => {
@@ -210,54 +219,80 @@ function decrease() {
   appearance: none;
   width: 100%;
   height: 8px;
-  background: var(--rdr-color-background);
+  background: transparent;
   outline: none;
-  border-radius: 4px;
+  border-radius: 0;
   position: relative;
+  display: block;
 }
 
-/* Thumb styling */
 .rdr-slider-input__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
-  height: 20px;
-  background: var(--rdr-color-primary);
+  height: 36px;
+  background-color: transparent;
+  background-image: var(--rdr-texture-selector);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
-  border-radius: 50%;
-  transition: all var(--rdr-transition-fast);
+  border-radius: 0;
   border: none;
-  margin-top: -6px;
+  transition: all var(--rdr-transition-fast);
+  margin-top: -14px;
+  box-shadow: none;
 }
 
 .rdr-slider-input__input::-moz-range-thumb {
   width: 20px;
-  height: 20px;
-  background: var(--rdr-color-primary);
+  height: 36px;
+  background-color: transparent;
+  background-image: var(--rdr-texture-selector);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
-  border-radius: 50%;
-  transition: all var(--rdr-transition-fast);
+  border-radius: 0;
   border: none;
+  transition: all var(--rdr-transition-fast);
+  box-shadow: none;
 }
 
 .rdr-slider-input__input::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.08);
+  filter: brightness(1.08);
 }
 
 .rdr-slider-input__input::-moz-range-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.08);
+  filter: brightness(1.08);
 }
 
-/* Track fill effect */
 .rdr-slider-input__input::-webkit-slider-runnable-track {
   height: 8px;
+  border-radius: 0;
+  border: none;
   background: linear-gradient(
     to right,
-    var(--rdr-color-primary) 0%,
-    var(--rdr-color-primary) var(--fill-percent, 0%),
-    var(--rdr-color-background) var(--fill-percent, 0%),
-    var(--rdr-color-background) 100%
+    #8a8a8a 0%,
+    #8a8a8a var(--rdr-slider-progress, 0%),
+    rgba(77, 77, 77, 0.35) var(--rdr-slider-progress, 0%),
+    rgba(77, 77, 77, 0.35) 100%
   );
-  border-radius: 4px;
+}
+
+.rdr-slider-input__input::-moz-range-track {
+  height: 8px;
+  border-radius: 0;
+  border: none;
+  background: rgba(77, 77, 77, 0.35);
+}
+
+.rdr-slider-input__input::-moz-range-progress {
+  height: 8px;
+  border-radius: 0;
+  border: none;
+  background: #8a8a8a;
 }
 </style>

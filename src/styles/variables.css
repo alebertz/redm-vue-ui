@@ -52,6 +52,7 @@
   --rdr-texture-box-red: url('../assets/textures/box-red.png');
   --rdr-texture-divider: url('../assets/textures/divider.png');
   --rdr-texture-border: url('../assets/textures/crafting_outline.png');
+  --rdr-texture-selector: url('../assets/textures/selector.png');
   --rdr-border-image-width: 30px;
   --rdr-border-image-width-inner: 1px;
   --rdr-border-image: var(--rdr-texture-border) 30 30 30 30 fill / var(--rdr-border-image-width) var(--rdr-border-image-width) var(--rdr-border-image-width) var(--rdr-border-image-width);
