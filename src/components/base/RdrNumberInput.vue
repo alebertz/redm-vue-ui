@@ -12,14 +12,16 @@
       <img src="../../assets/textures/arrow_left.png" alt="Decrease">
     </button>
     
-    <input
-      type="text"
-      :value="displayValue"
-      @input="handleInput"
-      @blur="handleBlur"
-      class="rdr-number-input__field"
-      :placeholder="placeholder"
-    />
+    <div class="rdr-number-input__wrap">
+      <input
+        type="text"
+        :value="displayValue"
+        @input="handleInput"
+        @blur="handleBlur"
+        class="rdr-number-input__field"
+        :placeholder="placeholder"
+      />
+    </div>
     
     <button 
       class="rdr-number-input__button"
@@ -157,18 +159,44 @@ function stopChange() {
 <style scoped>
 .rdr-number-input {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: var(--rdr-spacing-xs);
   width: 100%;
 }
 
-.rdr-number-input__field {
+.rdr-number-input__wrap {
   flex: 1;
+  position: relative;
+  display: block;
+  width: 100%;
+  isolation: isolate;
+  border-radius: 0;
+}
+
+.rdr-number-input__wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  border-image: var(--rdr-border-image);
+  opacity: var(--rdr-border-image-opacity);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 0;
+}
+
+.rdr-number-input__field {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
   background: var(--rdr-color-background);
+  border: 1px solid transparent;
+  border-radius: 0;
   font-family: var(--rdr-font-body);
   font-size: var(--rdr-font-size-md);
   padding: var(--rdr-spacing-sm) var(--rdr-spacing-md);
-  border: none;
   color: var(--rdr-color-text);
   text-align: center;
   transition: all var(--rdr-transition-fast);
@@ -180,6 +208,7 @@ function stopChange() {
 
 .rdr-number-input__field:focus {
   background: rgba(33, 33, 33, 0.5);
+  outline: none;
 }
 
 .rdr-number-input__button {
