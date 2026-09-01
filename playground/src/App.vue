@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRdrTheme } from '../../src/composables/useRdrTheme'
 
 const { theme } = useRdrTheme()
@@ -20,6 +20,33 @@ const demoNotes = [
   { id: 1, author: 'Dr. John Smith', date: '2026-01-20', content: 'Patient showing signs of improvement. Continue treatment.' },
   { id: 2, author: 'Dr. Sarah Johnson', date: '2026-01-21', content: 'Prescribed medication for pain relief. Follow-up in 3 days.' },
 ]
+
+// Table — sortable demo
+const sortBy = ref('name')
+const sortDir = ref('asc')
+const posse = ref([
+  { name: 'Arthur Morgan', camp: 'Colter', bounty: 500 },
+  { name: 'John Marston', camp: "Beecher's Hope", bounty: 320 },
+  { name: 'Dutch van der Linde', camp: 'Horseshoe Overlook', bounty: 850 },
+  { name: 'Sadie Adler', camp: 'Saint Denis', bounty: 400 },
+  { name: 'Host', camp: 'Rhodes', bounty: 120 },
+])
+
+const sortedPosse = computed(() => {
+  const dir = sortDir.value === 'asc' ? 1 : -1
+  const key = sortBy.value
+  return [...posse.value].sort((a, b) => {
+    const av = a[key]
+    const bv = b[key]
+    if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir
+    return String(av).localeCompare(String(bv)) * dir
+  })
+})
+
+function onTableSort({ key, dir }) {
+  // sorting is owned by parent — sortedPosse recomputes from sortBy/sortDir
+  // kept for demo logging if needed
+}
 </script>
 
 <template>
@@ -39,6 +66,59 @@ const demoNotes = [
           <RdrButton>Default Button</RdrButton>
           <RdrButton :active="true">Active Button</RdrButton>
           <RdrButton :disabled="true">Disabled Button</RdrButton>
+
+          <RdrHeader :level="3" style="margin-top: 20px;">Subtle (Secondary) Buttons</RdrHeader>
+          <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <RdrButton variant="subtle" size="sm">Subtle Small</RdrButton>
+            <RdrButton variant="subtle" size="md">Subtle Medium</RdrButton>
+            <RdrButton variant="subtle" size="lg">Subtle Large</RdrButton>
+            <RdrButton variant="subtle" size="md" :disabled="true">Subtle Disabled</RdrButton>
+          </div>
+
+          <RdrHeader :level="3" style="margin-top: 20px;">Buttons with Icons (<code>#icon</code> slot — pinned left, label centered)</RdrHeader>
+          <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <RdrButton variant="subtle" size="md">
+              <template #icon>
+                <img src="../../src/assets/textures/arrow_right.png" alt="Continue" />
+              </template>
+              Continue Recording
+            </RdrButton>
+
+            <RdrButton variant="subtle" size="md">
+              <template #icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </template>
+              Set Up New Character
+            </RdrButton>
+
+            <RdrButton variant="subtle" size="md">
+              <template #icon>
+                <img src="../../src/assets/textures/tick.png" alt="Saved" />
+              </template>
+              Publish All Pending Updates
+            </RdrButton>
+
+            <RdrButton variant="subtle" size="md">No Icon — Dead Centered</RdrButton>
+          </div>
+
+          <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+            <RdrButton variant="subtle" size="sm">
+              <template #icon>
+                <img src="../../src/assets/textures/arrow_right.png" alt="Small" />
+              </template>
+              Small Icon
+            </RdrButton>
+
+            <RdrButton variant="subtle" size="lg">
+              <template #icon>
+                <img src="../../src/assets/textures/tick.png" alt="Large" />
+              </template>
+              Large Icon
+            </RdrButton>
+          </div>
         </div>
       </div>
 
@@ -123,6 +203,81 @@ const demoNotes = [
         </div>
       </div>
 
+      <!-- Table Section -->
+      <div class="section">
+        <RdrHeader :level="2">Table</RdrHeader>
+
+        <!-- Hover demo — default table, rows highlight on hover -->
+        <div style="margin-top: 20px;">
+          <RdrHeader :level="3">Hover highlight (default)</RdrHeader>
+          <p style="opacity: 0.65; font-size: 13px; margin: 6px 0 10px;">Hover any row — subtle <code>rgba(255,255,255,0.04)</code> highlight on <code>tbody tr</code> only. Header &amp; footer unaffected.</p>
+          <RdrTable>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Kentucky Bourbon</td><td>Liquor</td><td>24</td><td>$1.80</td></tr>
+              <tr><td>Canned Beans</td><td>Provisions</td><td>68</td><td>$0.60</td></tr>
+              <tr><td>Premium Cigarettes</td><td>Tobacco</td><td>41</td><td>$0.75</td></tr>
+              <tr><td>Horse Reviver</td><td>Medical</td><td>15</td><td>$5.00</td></tr>
+              <tr><td>Snake Oil</td><td>Medical</td><td>33</td><td>$1.10</td></tr>
+            </tbody>
+          </RdrTable>
+
+          <RdrHeader :level="3" style="margin-top: 22px;">Compact + Footer</RdrHeader>
+          <RdrTable footer density="compact" style="margin-top: 10px;">
+            <thead>
+              <tr>
+                <th>Settlement</th>
+                <th>Wanted</th>
+                <th>Bounty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Rhodes</td><td>Dead or Alive</td><td>$120</td></tr>
+              <tr><td>Saint Denis</td><td>Dead or Alive</td><td>$350</td></tr>
+              <tr><td>Annesburg</td><td>Alive</td><td>$80</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td colspan="3">Posters amended by the Bounty Hunter Guild</td></tr>
+            </tfoot>
+          </RdrTable>
+
+          <!-- Sortable demo — opt-in via props -->
+          <RdrHeader :level="3" style="margin-top: 22px;">Sortable (opt-in)</RdrHeader>
+          <p style="opacity: 0.65; font-size: 13px; margin: 6px 0 10px;">Headers with <code>data-sort-key</code> become clickable when <code>sortable</code> is true. Click <strong>Name</strong> / <strong>Camp</strong> / <strong>Bounty</strong> to cycle <code>asc → desc</code>. Parent owns sorting.</p>
+          <RdrTable
+            sortable
+            :sortBy="sortBy"
+            :sortDir="sortDir"
+            @update:sortBy="v => sortBy = v"
+            @update:sortDir="v => sortDir = v"
+            @sort="onTableSort"
+          >
+            <thead>
+              <tr>
+                <th data-sort-key="name">Name</th>
+                <th data-sort-key="camp">Camp</th>
+                <th data-sort-key="bounty">Bounty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in sortedPosse" :key="row.name">
+                <td>{{ row.name }}</td>
+                <td>{{ row.camp }}</td>
+                <td>${{ row.bounty }}</td>
+              </tr>
+            </tbody>
+          </RdrTable>
+          <p style="margin-top: 8px; opacity: 0.6; font-size: 12px;">Sorted by <strong>{{ sortBy }}</strong> ({{ sortDir }}) — ▲/▼ via ::after, opacity active vs inactive.</p>
+        </div>
+      </div>
+
       <!-- Cards Section -->
       <div class="section">
         <RdrHeader :level="2">Cards</RdrHeader>
@@ -144,9 +299,7 @@ const demoNotes = [
         <div style="margin-top: 20px;">
           <p>Text before divider</p>
           <RdrDivider />
-          <p>Text after normal divider</p>
-          <RdrDivider :thick="true" />
-          <p>Text after thick divider</p>
+          <p>Text after divider</p>
         </div>
       </div>
 
