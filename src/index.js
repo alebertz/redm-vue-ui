@@ -11,6 +11,7 @@ import RdrDivider from './components/base/RdrDivider.vue'
 import RdrSliderInput from './components/base/RdrSlider.vue'
 import RdrNumberInput from './components/base/RdrNumberInput.vue'
 import RdrCheckbox from './components/base/RdrCheckbox.vue'
+import RdrTable from './components/base/RdrTable.vue'
 
 // Layout Components
 import RdrPanel from './components/layout/RdrPanel.vue'
@@ -38,6 +39,7 @@ export {
   RdrSliderInput,
   RdrNumberInput,
   RdrCheckbox,
+  RdrTable,
   // Layout
   RdrPanel,
   RdrModal,
@@ -61,6 +63,7 @@ const RedmVueUI = {
     app.component('RdrSliderInput', RdrSliderInput)
     app.component('RdrNumberInput', RdrNumberInput)
     app.component('RdrCheckbox', RdrCheckbox)
+    app.component('RdrTable', RdrTable)
     app.component('RdrPanel', RdrPanel)
     app.component('RdrModal', RdrModal)
     app.component('RdrSlider', RdrSlider)
