@@ -27,8 +27,13 @@ defineProps({
 }
 
 .rdr-header hr {
-  border: var(--rdr-border-width) solid var(--rdr-color-primary);
+  border: none;
+  height: 2px;
+  background: var(--rdr-texture-divider);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   margin-top: var(--rdr-spacing-xs);
+  opacity: var(--rdr-divider-opacity);
 }
 
 .rdr-header h1 {
