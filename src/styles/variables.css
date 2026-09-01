@@ -43,7 +43,7 @@
   
   /* Scrollbar */
   --rdr-scrollbar-width: 50px;
-  --rdr-scrollbar-thumb: rgba(178, 18, 20, 0.3);
+  --rdr-scrollbar-thumb: rgba(120, 120, 120, 0.32);
   
   /* Textures */
   --rdr-texture-bg: url('../assets/textures/bg.png');
